@@ -22,9 +22,39 @@
 		{{greeting}}
 	</div>
 
+	<div>
+		<button ui-sref="state1">Tab 1</button>
+		<button ui-sref="state2">Tab 2</button>
+	</div>
+	<div style="border: 1px black">
+		<div ui-view></div>
+	</div>
+
 	<script type="text/javascript">
-		angular.module('app', ['ngRoute'])
+		angular.module('app', ['ngRoute', 'ui.router'])
 			.controller('MainController', MainController);
+
+		angular.module('app').config(
+			function ($stateProvider, $urlRouterProvider) {
+				$urlRouterProvider.otherwise("/state1");
+
+				$stateProvider
+					.state(
+						'state1',
+						{
+							url: "/state1",
+							templateUrl: "partials/state1"
+						}
+					)
+					.state(
+						'state2',
+						{
+							url: "/state2",
+							templateUrl: "partials/state2"
+						}
+					);
+			}
+		);
 	</script>
 </body>
 </html>

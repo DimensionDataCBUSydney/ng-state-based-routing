@@ -10,7 +10,12 @@ namespace StateBasedRouting
 {
     public class Startup
     {
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
+        /// <summary>
+		///		Configure services required by the application.
+		/// </summary>
+		/// <param name="services">
+		///		The global application service collection.
+		/// </param>
         public void ConfigureServices(IServiceCollection services)
         {
 	        if (services == null)
@@ -19,6 +24,12 @@ namespace StateBasedRouting
 	        services.AddMvc();
         }
 
+		/// <summary>
+		///		Configure the application pipeline.
+		/// </summary>
+		/// <param name="app">
+		///		The application pipeline builder.
+		/// </param>
         public void Configure(IApplicationBuilder app)
         {
 	        if (app == null)
