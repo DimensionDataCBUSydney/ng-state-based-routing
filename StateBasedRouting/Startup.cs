@@ -22,6 +22,7 @@ namespace StateBasedRouting
 		        throw new ArgumentNullException("services");
 
 	        services.AddMvc();
+	        services.AddLogging();
         }
 
 		/// <summary>
@@ -41,10 +42,10 @@ namespace StateBasedRouting
 			if (loggerFactory == null)
 				throw new ArgumentNullException("loggerFactory");
 
+			loggerFactory.AddConsole();
+
 			app.UseStaticFiles();
 	        app.UseMvc();
-
-			loggerFactory.AddConsole();
 		}
     }
 }
