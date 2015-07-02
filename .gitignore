@@ -188,3 +188,10 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+# Compiled / staged scripts
+/*/wwwroot/scripts/app/
+/*/wwwroot/scripts/vendor/
+/*/wwwroot/css/app/
+/*/wwwroot/css/vendor/
+

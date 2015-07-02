@@ -1,0 +1,9 @@
+{
+    "name": "StateBasedRouting",
+    "private": true,
+    "dependencies": {
+        "angularjs": "1.4.1",
+        "angular-route": "1.4.1",
+        "angular-ui-router": "0.2.15"
+    }
+}
