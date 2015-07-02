@@ -15,6 +15,8 @@ namespace StateBasedRouting
         {
 	        if (services == null)
 		        throw new ArgumentNullException("services");
+
+	        services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -23,6 +25,7 @@ namespace StateBasedRouting
 		        throw new ArgumentNullException("app");
 
 	        app.UseStaticFiles();
+	        app.UseMvc();
         }
     }
 }
