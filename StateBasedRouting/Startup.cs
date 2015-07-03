@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.StaticFiles;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 
@@ -21,7 +22,6 @@ namespace StateBasedRouting
 	        if (services == null)
 		        throw new ArgumentNullException("services");
 
-	        services.AddMvc();
 	        services.AddLogging();
         }
 
@@ -44,8 +44,7 @@ namespace StateBasedRouting
 
 			loggerFactory.AddConsole();
 
-			app.UseStaticFiles();
-	        app.UseMvc();
+			app.UseFileServer();
 		}
     }
 }

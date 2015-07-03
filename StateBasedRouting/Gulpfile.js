@@ -2,6 +2,10 @@
 
 var gulp = require('gulp');
 
+var config = {
+	bowerDir: "./bower_components"
+};
+
 gulp.task(
 	'default',
 	['build']
@@ -28,6 +32,7 @@ var cp = require('gulp-copy');
 var rm = require('gulp-clean');
 var tsc = require('gulp-tsc');
 var bowerMain = require('bower-main');
+var mainBowerFiles = require('main-bower-files');
 
 var bowerScripts = bowerMain('js', 'min.js');
 var bowerStyles = bowerMain('css', 'min.css');
@@ -37,25 +42,21 @@ var bowerStyles = bowerMain('css', 'min.css');
 
 gulp.task(
 	'build-vendor-js',
-	function()
-	{
-		var pipeline =
-			gulp.src(
-				bowerScripts.normal
-			)
+	function () {
+		gulp.src(bowerScripts.normal)
 			.pipe(
 				gulp.dest('wwwroot/scripts/vendor')
 			);
-
-		return pipeline;
 	}
 );
 
 gulp.task(
 	'clean-vendor-js',
-	function()
-	{
-		return gulp.src('wwwroot/scripts/vendor').pipe(rm());
+	function () {
+		gulp.src('wwwroot/scripts/vendor')
+			.pipe(
+				rm()
+			);
 	}
 );
 
@@ -65,23 +66,31 @@ gulp.task(
 gulp.task(
 	'build-vendor-css',
 	function () {
-		var pipeline =
-			gulp.src(
-				bowerStyles.normal
-			)
+		gulp.src(bowerStyles.normal)
 			.pipe(
 				gulp.dest('wwwroot/css/vendor')
 			);
 
-		return pipeline;
+		// Explicit copy for bootstrap components
+		gulp.src(config.bowerDir + '/bootstrap/dist/css/*.css')
+			.pipe(
+				gulp.dest('wwwroot/css/vendor')
+			);
+
+		gulp.src(config.bowerDir + '/bootstrap/dist/fonts/*')
+			.pipe(
+				gulp.dest('wwwroot/fonts')
+			);
 	}
 );
 
 gulp.task(
 	'clean-vendor-css',
-	function()
-	{
-		return gulp.src('wwwroot/css/vendor').pipe(rm());
+	function () {
+		gulp.src('wwwroot/css/vendor')
+			.pipe(
+				rm()
+			);
 	}
 );
 
@@ -91,17 +100,12 @@ gulp.task(
 gulp.task(
 	'build-ts',
 	function () {
-		var pipeline =
-			gulp.src(
-				'app/**/*.ts'
-			)
+		gulp.src('app/**/*.ts')
 			.pipe(
 				tsc()
 			)
 			.pipe(
 				gulp.dest('wwwroot/scripts/app')
 			);
-
-		return pipeline;
 	}
 );

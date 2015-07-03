@@ -1,25 +1,23 @@
-﻿@model dynamic
-@{
-	Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html ng-app="app">
 <head>
 	<title>Hello</title>
 
-	<script src="~/scripts/vendor/jquery.js"></script>
-	<script src="~/scripts/vendor/angular.js"></script>
-	<script src="~/scripts/vendor/angular-route.js"></script>
-	<script src="~/scripts/vendor/angular-ui-router.js"></script>
+	<link rel="stylesheet" href="css/vendor/bootstrap.css"/>
+	<link rel="stylesheet" href="css/vendor/bootstrap-theme.css" />
+
+	<script src="scripts/vendor/jquery.js"></script>
+	<script src="scripts/vendor/angular.js"></script>
+	<script src="scripts/vendor/angular-route.js"></script>
+	<script src="scripts/vendor/angular-ui-router.js"></script>
 </head>
 <body>
 	<div ng-controller="MainController">
 		{{greeting}}
 	</div>
 	<hr />
-	
+
 	<div style="border: 1px black">
 		<div ui-view></div>
 	</div>
@@ -43,7 +41,7 @@
 						'root',
 						{
 							url: "/root",
-							templateUrl: "partials/state-root",
+							templateUrl: "partials/state-root.html",
 							controller: "StateRootController"
 						}
 					)
@@ -52,7 +50,7 @@
 						{
 							url: "/root/state1",
 							controller: "State1Controller",
-							templateUrl: "partials/state1"
+							templateUrl: "partials/state1.html"
 						}
 					)
 					.state(
@@ -60,15 +58,15 @@
 						{
 							url: "/root/state2",
 							controller: "State2Controller",
-							templateUrl: "partials/state2"
+							templateUrl: "partials/state2.html"
 						}
 					);
 			}
 		);
 	</script>
-	<script src="~/scripts/app/controllers/main-controller.js"></script>
-	<script src="~/scripts/app/controllers/state-root-controller.js"></script>
-	<script src="~/scripts/app/controllers/state1-controller.js"></script>
-	<script src="~/scripts/app/controllers/state2-controller.js"></script>
+	<script src="scripts/app/controllers/main-controller.js"></script>
+	<script src="scripts/app/controllers/state-root-controller.js"></script>
+	<script src="scripts/app/controllers/state1-controller.js"></script>
+	<script src="scripts/app/controllers/state2-controller.js"></script>
 </body>
 </html>
