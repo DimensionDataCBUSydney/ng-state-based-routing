@@ -31,6 +31,20 @@ namespace StateBasedRouting.Controllers
 		}
 
 		/// <summary>
+		///		Render the "state-root" partial.
+		/// </summary>
+		/// <returns>
+		///		An action result that renders the partial.
+		/// </returns>
+		[Route("state-root")]
+		public IActionResult StateRoot()
+		{
+			_logger.LogInformation("Serving view for {StateName}.", "state root");
+
+			return View();
+		}
+
+		/// <summary>
 		///		Render the "index1" partial.
 		/// </summary>
 		/// <returns>

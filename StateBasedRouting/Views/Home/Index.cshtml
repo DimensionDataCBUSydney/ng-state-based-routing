@@ -1,5 +1,4 @@
 ﻿@model dynamic
-
 @{
 	Layout = null;
 }
@@ -14,47 +13,62 @@
 	<script src="~/scripts/vendor/angular.js"></script>
 	<script src="~/scripts/vendor/angular-route.js"></script>
 	<script src="~/scripts/vendor/angular-ui-router.js"></script>
-
-	<script src="~/scripts/app/controllers/main-controller.js"></script>
 </head>
 <body>
 	<div ng-controller="MainController">
 		{{greeting}}
 	</div>
-
-	<div>
-		<button ui-sref="state1">Tab 1</button>
-		<button ui-sref="state2">Tab 2</button>
-	</div>
+	<hr />
+	
 	<div style="border: 1px black">
 		<div ui-view></div>
 	</div>
 
 	<script type="text/javascript">
-		angular.module('app', ['ngRoute', 'ui.router'])
-			.controller('MainController', MainController);
-
-		angular.module('app').config(
-			function ($stateProvider, $urlRouterProvider) {
-				$urlRouterProvider.otherwise("/state1");
+		angular
+			.module(
+				'app',
+				[
+					'ngRoute',
+					'ui.router'
+				]
+			)
+			.config(
+			function ($stateProvider, $urlRouterProvider)
+			{
+				$urlRouterProvider.otherwise("/root");
 
 				$stateProvider
 					.state(
-						'state1',
+						'root',
 						{
-							url: "/state1",
+							url: "/root",
+							templateUrl: "partials/state-root",
+							controller: "StateRootController"
+						}
+					)
+					.state(
+						'root.state1',
+						{
+							url: "/root/state1",
+							controller: "State1Controller",
 							templateUrl: "partials/state1"
 						}
 					)
 					.state(
-						'state2',
+						'root.state2',
 						{
-							url: "/state2",
+							url: "/root/state2",
+							controller: "State2Controller",
 							templateUrl: "partials/state2"
 						}
 					);
 			}
 		);
 	</script>
+	<script src="~/scripts/app/controllers/main-controller.js"></script>
+	<script src="~/scripts/app/controllers/state-root-controller.js"></script>
+	<script src="~/scripts/app/controllers/state1-controller.js"></script>
+	<script src="~/scripts/app/controllers/state2-controller.js"></script>
 </body>
 </html>

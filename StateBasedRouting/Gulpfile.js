@@ -11,6 +11,7 @@ gulp.task(
 	'build',
 	[
 		'build-vendor-js',
+		'build-vendor-css',
 		'build-ts'
 	]
 );
