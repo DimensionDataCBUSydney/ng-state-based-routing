@@ -36,23 +36,6 @@ class TransparentAuthInterceptor
 	private accessTokenRequest: ng.IHttpPromise<IAuthTokenResult>;
 	
 	/**
-	 * Get the Angular HTTP service.
-	 * 
-	 * Lazily-resolved because capture in the constructor would lead to a circular dependency.  
-	 * @returns {} 
-	 */
-	private getHttpService: () => ng.IHttpService;
-	
-	/**
-	 * Intercept an HTTP request.
-	 * Returns a promise that resolves once authentication is complete (or immediately, if the request configuration has a "withAccessToken" property set to true) 
-	 * @param config The HTTP request configuration.
-	 * @returns {} A promise that will resolve as updated configuration once authentication is complete.
-	 * @see ITransparentAuthRequestConfig 
-	 */
-	public request: (config: ITransparentAuthRequestConfig) => ng.IPromise<ng.IRequestConfig>;
-
-	/**
 	 * Create a new TransparentAuthInterceptor.
 	 * @param $q The Angular promise API
 	 * @param $injector The angular dependency-injection API. 
@@ -64,7 +47,7 @@ class TransparentAuthInterceptor
 			return $injector.get("$http");
 		};
 
-		// AF: I dislike having to put this in here - member functions *should* see "this" correctly, too, but it seems to be something to do with the way Angular calls interceptors.
+		// AF: I dislike having to put this in here - member functions *should* see "this" correctly, but only lambdas will capture it.
 		this.request = config => {
 			console.log("TransparentAuthInterceptor - intercepting request...");
 
@@ -100,6 +83,23 @@ class TransparentAuthInterceptor
 			return afterAuthentication.promise;
 		};
 	}
+
+	/**
+	 * Intercept an HTTP request.
+	 * Returns a promise that resolves once authentication is complete (or immediately, if the request configuration has a "withAccessToken" property set to true) 
+	 * @param config The HTTP request configuration.
+	 * @returns {} A promise that will resolve as updated configuration once authentication is complete.
+	 * @see ITransparentAuthRequestConfig 
+	 */
+	public request: (config: ITransparentAuthRequestConfig) => ng.IPromise<ng.IRequestConfig>;
+
+	/**
+	 * Get the Angular HTTP service.
+	 * 
+	 * Lazily-resolved because capture in the constructor would lead to a circular dependency
+	 * @returns {} The $http service.
+	 */
+	private getHttpService: () => ng.IHttpService;
 
 	/**
 	 * Asynchronously request an access token.

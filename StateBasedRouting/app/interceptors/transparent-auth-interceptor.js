@@ -16,7 +16,7 @@ var TransparentAuthInterceptor = (function () {
         this.getHttpService = function () {
             return $injector.get("$http");
         };
-        // AF: I dislike having to put this in here - member functions *should* see "this" correctly, too, but it seems to be something to do with the way Angular calls interceptors.
+        // AF: I dislike having to put this in here - member functions *should* see "this" correctly, but only lambdas will capture it.
         this.request = function (config) {
             console.log("TransparentAuthInterceptor - intercepting request...");
             var afterAuthentication = _this.$q.defer();
