@@ -12,10 +12,8 @@ var State2Controller = (function () {
      * @returns {}
      */
     function State2Controller($scope, $http) {
-        var _this = this;
         this.$scope = $scope;
         console.log("State2Controller constructed.");
-        this.scope = $scope; // AF: No idea why intellisense won't pick up the indirect inheritance from ng.IScope.
         $scope.greeting = "Hello from State 2";
         $scope.groaning = "Bah, Angular World!";
         $scope.gridDataSource = new kendo.data.DataSource({
@@ -38,20 +36,7 @@ var State2Controller = (function () {
                 }
             ]
         };
-        // Wait until the Kendo grid is ready and provides our scope with a reference to it
-        var gotGridInstance = this.scope.$watch("grid", function (newValue) {
-            if (!newValue)
-                return;
-            _this.grid = newValue;
-            gotGridInstance(); // So stop watching.
-            //this.refreshGrid();
-        });
     }
-    State2Controller.prototype.refreshGrid = function () {
-        if (this.grid) {
-            this.$scope.gridDataSource.read();
-        }
-    };
     /**
      * The controller's dependencies to be injected.
      */

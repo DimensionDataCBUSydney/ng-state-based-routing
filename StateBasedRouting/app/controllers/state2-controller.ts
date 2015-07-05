@@ -74,9 +74,6 @@ class State2Controller
 		'$http'
 	];
 
-	private grid: kendo.ui.Grid;
-	private scope: ng.IScope;
-
 	/**
 	 * Create a new State2Controller.
 	 * @param $scope The controller scope.
@@ -84,9 +81,7 @@ class State2Controller
 	 */
 	constructor(private $scope: IState2ControllerScope, $http : ng.IHttpService) {
 		console.log("State2Controller constructed.");
-
-		this.scope = $scope; // AF: No idea why intellisense won't pick up the indirect inheritance from ng.IScope.
-
+		
 		$scope.greeting = "Hello from State 2";
 		$scope.groaning = "Bah, Angular World!";
 
@@ -118,26 +113,6 @@ class State2Controller
 				}
 			]			
 		};
-
-		// Wait until the Kendo grid is ready and provides our scope with a reference to it
-		var gotGridInstance = this.scope.$watch(
-			"grid",
-			newValue => {
-				if (!newValue)
-					return;
-
-				this.grid = newValue;
-				gotGridInstance(); // So stop watching.
-
-				//this.refreshGrid();
-			}
-		);
-	}
-
-	private refreshGrid() : void {
-		if (this.grid) {
-			this.$scope.gridDataSource.read();
-		}
 	}
 }
 
