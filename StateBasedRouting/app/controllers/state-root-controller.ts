@@ -1,41 +1,43 @@
 ﻿/// <reference path="../../typings/angularjs/angular.d.ts"/>
 
-/**
- * Scope definition for the StateRoot application controller.
- */
-interface IStateRootControllerScope
-	extends ng.IScope
-{
+module ddcloud.sbr.controllers {
 	/**
-	 * A greeting to display.
+	 * Scope definition for the StateRoot application controller.
 	 */
-	greeting: string;
-}
-
-/**
- * The root state controller.
- */
-class StateRootController
-{
-	/**
-	 * The controller's dependencies to be injected.
-	 */
-	public static $inject = [
-		'$scope'
-	];
-
-	/**
-	 * Create a new StateRootController.
-	 * @param $scope The controller scope.
-	 * @returns {} 
-	 */
-	constructor(private $scope: IStateRootControllerScope)
+	export interface IStateRootControllerScope
+		extends ng.IScope
 	{
-		console.log("StateRootController constructed.");
-
-		$scope.greeting = "Hello from Root State";
+		/**
+		 * A greeting to display.
+		 */
+		greeting: string;
 	}
-}
 
-angular.module('app')
-	.controller('StateRootController', StateRootController);
+	/**
+	 * The root state controller.
+	 */
+	class StateRootController
+	{
+		/**
+		 * The controller's dependencies to be injected.
+		 */
+		public static $inject = [
+			'$scope'
+		];
+
+		/**
+		 * Create a new StateRootController.
+		 * @param $scope The controller scope.
+		 * @returns {} 
+		 */
+		constructor(private $scope: IStateRootControllerScope)
+		{
+			console.log("StateRootController constructed.");
+
+			$scope.greeting = "Hello from Root State";
+		}
+	}
+
+	angular.module('app')
+		.controller('StateRootController', StateRootController);
+}
