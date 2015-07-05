@@ -32,7 +32,7 @@ module ddcloud.sbr.controllers {
 		 * @param $scope The controller scope.
 		 * @returns {} 
 		 */
-		constructor(private $scope: IMainControllerScope, accessTokenService: IAccessTokenService)
+		constructor(private $scope: IMainControllerScope, accessTokenService: services.IAccessTokenService)
 		{
 			console.log("MainController constructed.");
 
