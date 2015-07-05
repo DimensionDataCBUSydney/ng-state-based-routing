@@ -89,7 +89,13 @@ class State2Controller
 			{
 				transport: {
 					read: options => {
-						$http.get<IState2Data>('/data/state2-data.json')
+						$http
+							.get<IState2Data>(
+								'/data/state2-data.json',
+								{
+									withAccessToken: true // Triggers the transparent authentication interceptor.
+								}
+							)
 							.success(
 								result => options.success(result.data)
 							)

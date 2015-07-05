@@ -36,8 +36,7 @@
 				]
 			)
 			.config(
-				function ($stateProvider, $urlRouterProvider)
-				{
+				function($stateProvider, $urlRouterProvider) {
 					$urlRouterProvider.otherwise("/root");
 
 					$stateProvider
@@ -68,6 +67,7 @@
 				}
 			);
 	</script>
+	<script src="scripts/app/interceptors/transparent-auth-interceptor.js"></script>
 	<script src="scripts/app/controllers/main-controller.js"></script>
 	<script src="scripts/app/controllers/state-root-controller.js"></script>
 	<script src="scripts/app/controllers/state1-controller.js"></script>

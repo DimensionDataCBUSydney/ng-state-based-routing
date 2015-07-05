@@ -19,7 +19,9 @@ var State2Controller = (function () {
         $scope.gridDataSource = new kendo.data.DataSource({
             transport: {
                 read: function (options) {
-                    $http.get('/data/state2-data.json').success(function (result) { return options.success(result.data); }).error(function (result) { return options.error(result); });
+                    $http.get('/data/state2-data.json', {
+                        withAccessToken: true // Triggers the transparent authentication interceptor.
+                    }).success(function (result) { return options.success(result.data); }).error(function (result) { return options.error(result); });
                 }
             }
         });
