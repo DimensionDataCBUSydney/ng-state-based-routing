@@ -94,7 +94,7 @@ gulp.task(
 				gulp.dest(config.dir.fonts)
 			);
 
-		gulp.src("vendor/css/**/*.css")
+		gulp.src("vendor/css/**/*")
 			.pipe(
 				gulp.dest(config.dir.vendorStyles)
 			);

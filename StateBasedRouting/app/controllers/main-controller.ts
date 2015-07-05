@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../typings/angularjs/angular.d.ts"/>
+/// <reference path="../services/access-token-service.ts"/>
 
 /**
  * Scope definition for the main application controller.
@@ -21,7 +22,8 @@ class MainController
 	 * The controller's dependencies to be injected.
 	 */
 	public static $inject = [
-		'$scope'
+		'$scope',
+		"accessTokenService"
 	];
 
 	/**
@@ -29,11 +31,16 @@ class MainController
 	 * @param $scope The controller scope.
 	 * @returns {} 
 	 */
-	constructor(private $scope: IMainControllerScope)
+	constructor(private $scope: IMainControllerScope, accessTokenService: IAccessTokenService)
 	{
 		console.log("MainController constructed.");
 
 		$scope.greeting = "Hello, Angular World.";
+
+		// STS client configuration
+		accessTokenService.tokenServiceUrl = "/data/dummy-token.json";
+		accessTokenService.clientId = "DummyClientId";
+		accessTokenService.secret = "c29saXBzaXN0IG5hdGlvbg==";
 	}
 }
 

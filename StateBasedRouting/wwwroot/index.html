@@ -25,6 +25,7 @@
 		<div ui-view></div>
 	</div>
 
+	<!-- AF: Yeah way too many scripts but for now, messing around with browserify or RequireJS AMDs would obscure the important bits of this demo -->
 	<script type="text/javascript">
 		angular
 			.module(
@@ -36,37 +37,43 @@
 				]
 			)
 			.config(
-				function($stateProvider, $urlRouterProvider) {
-					$urlRouterProvider.otherwise("/root");
+				[
+					"$stateProvider",
+					"$urlRouterProvider",
+					function ($stateProvider, $urlRouterProvider) {
+						$stateProvider
+							.state(
+								'root',
+								{
+									url: "/root",
+									templateUrl: "partials/state-root.html",
+									controller: "StateRootController"
+								}
+							)
+							.state(
+								'root.state1',
+								{
+									url: "/root/state1",
+									controller: "State1Controller",
+									templateUrl: "partials/state1.html"
+								}
+							)
+							.state(
+								'root.state2',
+								{
+									url: "/root/state2",
+									controller: "State2Controller",
+									templateUrl: "partials/state2.html"
+								}
+							);
 
-					$stateProvider
-						.state(
-							'root',
-							{
-								url: "/root",
-								templateUrl: "partials/state-root.html",
-								controller: "StateRootController"
-							}
-						)
-						.state(
-							'root.state1',
-							{
-								url: "/root/state1",
-								controller: "State1Controller",
-								templateUrl: "partials/state1.html"
-							}
-						)
-						.state(
-							'root.state2',
-							{
-								url: "/root/state2",
-								controller: "State2Controller",
-								templateUrl: "partials/state2.html"
-							}
-						);
-				}
+						$urlRouterProvider
+							.otherwise("/root");
+					}
+				]
 			);
 	</script>
+	<script src="scripts/app/services/access-token-service.js"></script>
 	<script src="scripts/app/interceptors/transparent-auth-interceptor.js"></script>
 	<script src="scripts/app/controllers/main-controller.js"></script>
 	<script src="scripts/app/controllers/state-root-controller.js"></script>

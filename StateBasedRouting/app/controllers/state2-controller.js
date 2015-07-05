@@ -20,7 +20,7 @@ var State2Controller = (function () {
             transport: {
                 read: function (options) {
                     $http.get('/data/state2-data.json', {
-                        withAccessToken: true // Triggers the transparent authentication interceptor.
+                        accessTokenRealm: "http://cloud.dimensiondata.com/demos/ng-state-based-routing/" // Triggers the transparent authentication interceptor.
                     }).success(function (result) { return options.success(result.data); }).error(function (result) { return options.error(result); });
                 }
             }

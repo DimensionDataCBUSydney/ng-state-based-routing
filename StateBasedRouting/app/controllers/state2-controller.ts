@@ -93,7 +93,7 @@ class State2Controller
 							.get<IState2Data>(
 								'/data/state2-data.json',
 								{
-									withAccessToken: true // Triggers the transparent authentication interceptor.
+									accessTokenRealm: "http://cloud.dimensiondata.com/demos/ng-state-based-routing/" // Triggers the transparent authentication interceptor.
 								}
 							)
 							.success(
