@@ -1,59 +1,71 @@
-﻿/// <binding BeforeBuild='build' />
+﻿/// <binding BeforeBuild="build" />
 
-var gulp = require('gulp');
+var gulp = require("gulp");
 
 var config = {
-	bowerDir: "./bower_components"
+	dir: {
+		appScripts: "wwwroot/scripts/app",
+		vendorScripts: "wwwroot/scripts/vendor",
+		vendorStyles: "wwwroot/css/vendor",
+		fonts: "wwwroot/styles",
+		bower: "./bower_components"
+	}
 };
 
 gulp.task(
-	'default',
-	['build']
+	"default",
+	["build"]
 );
 
 gulp.task(
-	'build',
+	"build",
 	[
-		'build-vendor-js',
-		'build-vendor-css',
-		'build-ts'
+		"build-vendor-js",
+		"build-vendor-css",
+		"build-ts"
 	]
 );
 
 gulp.task(
-	'clean',
+	"clean",
 	[
-		'clean-vendor-js',
-		'clean-vendor-css'
+		"clean-app-js",
+		"clean-vendor-js",
+		"clean-vendor-css"
 	]
 );
 
-var cp = require('gulp-copy');
-var rm = require('gulp-clean');
-var tsc = require('gulp-tsc');
-var bowerMain = require('bower-main');
-var mainBowerFiles = require('main-bower-files');
+var cp = require("gulp-copy");
+var rm = require("gulp-clean");
+var tsc = require("gulp-tsc");
+var bowerMain = require("bower-main");
+var mainBowerFiles = require("main-bower-files");
 
-var bowerScripts = bowerMain('js', 'min.js');
-var bowerStyles = bowerMain('css', 'min.css');
+var bowerScripts = bowerMain("js", "min.js");
+var bowerStyles = bowerMain("css", "min.css");
 
 /////////////////
 // Vendor scripts
 
 gulp.task(
-	'build-vendor-js',
+	"build-vendor-js",
 	function () {
 		gulp.src(bowerScripts.normal)
 			.pipe(
-				gulp.dest('wwwroot/scripts/vendor')
+				gulp.dest(config.dir.vendorScripts)
+			);
+
+		gulp.src("vendor/js/**/*.js")
+			.pipe(
+				gulp.dest(config.dir.vendorScripts)
 			);
 	}
 );
 
 gulp.task(
-	'clean-vendor-js',
+	"clean-vendor-js",
 	function () {
-		gulp.src('wwwroot/scripts/vendor')
+		gulp.src(config.dir.vendorScripts)
 			.pipe(
 				rm()
 			);
@@ -64,30 +76,36 @@ gulp.task(
 // Vendor styles
 
 gulp.task(
-	'build-vendor-css',
+	"build-vendor-css",
 	function () {
 		gulp.src(bowerStyles.normal)
 			.pipe(
-				gulp.dest('wwwroot/css/vendor')
+				gulp.dest(config.dir.vendorStyles)
 			);
 
 		// Explicit copy for bootstrap components
-		gulp.src(config.bowerDir + '/bootstrap/dist/css/*.css')
+		gulp.src(config.bowerDir + "/bootstrap/dist/css/*.css")
 			.pipe(
-				gulp.dest('wwwroot/css/vendor')
+				gulp.dest(config.dir.vendorStyles)
 			);
 
-		gulp.src(config.bowerDir + '/bootstrap/dist/fonts/*')
+		gulp.src(config.bowerDir + "/bootstrap/dist/fonts/*")
 			.pipe(
-				gulp.dest('wwwroot/fonts')
+				gulp.dest(config.dir.fonts)
 			);
+
+		gulp.src("vendor/css/**/*.css")
+			.pipe(
+				gulp.dest(config.dir.vendorStyles)
+			);
+
 	}
 );
 
 gulp.task(
-	'clean-vendor-css',
+	"clean-vendor-css",
 	function () {
-		gulp.src('wwwroot/css/vendor')
+		gulp.src(config.dir.vendorStyles)
 			.pipe(
 				rm()
 			);
@@ -98,14 +116,24 @@ gulp.task(
 // Application scripts
 
 gulp.task(
-	'build-ts',
+	"build-ts",
 	function () {
-		gulp.src('app/**/*.ts')
+		gulp.src("app/**/*.ts")
 			.pipe(
 				tsc()
 			)
 			.pipe(
-				gulp.dest('wwwroot/scripts/app')
+				gulp.dest(config.dir.appScripts)
+			);
+	}
+);
+
+gulp.task(
+	"clean-app-js",
+	function () {
+		gulp.src(config.dir.appScripts)
+			.pipe(
+				rm()
 			);
 	}
 );

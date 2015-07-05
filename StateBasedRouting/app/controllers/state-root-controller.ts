@@ -4,6 +4,7 @@
  * Scope definition for the StateRoot application controller.
  */
 interface IStateRootControllerScope
+	extends ng.IScope
 {
 	/**
 	 * A greeting to display.

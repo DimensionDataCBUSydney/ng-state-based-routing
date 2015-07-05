@@ -1,0 +1,13 @@
+﻿{
+    "data": [
+        {
+            "field1": "Hello",
+            "field2": "New World"
+        },
+        {
+            "field1": "Goodbye",
+            "field2": "Cruel World"
+        }
+    ],
+    "status": "success"
+}

@@ -5,12 +5,15 @@
 	<title>Hello</title>
 
 	<link rel="stylesheet" href="css/vendor/bootstrap.css"/>
-	<link rel="stylesheet" href="css/vendor/bootstrap-theme.css" />
+	<link rel="stylesheet" href="css/vendor/bootstrap-theme.css"/>
+	<link rel="stylesheet" href="css/vendor/kendo.common-bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/vendor/kendo.default.min.css" />
 
 	<script src="scripts/vendor/jquery.js"></script>
 	<script src="scripts/vendor/angular.js"></script>
 	<script src="scripts/vendor/angular-route.js"></script>
 	<script src="scripts/vendor/angular-ui-router.js"></script>
+	<script src="scripts/vendor/kendo.all.js"></script>
 </head>
 <body>
 	<div ng-controller="MainController">
@@ -28,41 +31,42 @@
 				'app',
 				[
 					'ngRoute',
-					'ui.router'
+					'ui.router',
+					'kendo.directives'
 				]
 			)
 			.config(
-			function ($stateProvider, $urlRouterProvider)
-			{
-				$urlRouterProvider.otherwise("/root");
+				function ($stateProvider, $urlRouterProvider)
+				{
+					$urlRouterProvider.otherwise("/root");
 
-				$stateProvider
-					.state(
-						'root',
-						{
-							url: "/root",
-							templateUrl: "partials/state-root.html",
-							controller: "StateRootController"
-						}
-					)
-					.state(
-						'root.state1',
-						{
-							url: "/root/state1",
-							controller: "State1Controller",
-							templateUrl: "partials/state1.html"
-						}
-					)
-					.state(
-						'root.state2',
-						{
-							url: "/root/state2",
-							controller: "State2Controller",
-							templateUrl: "partials/state2.html"
-						}
-					);
-			}
-		);
+					$stateProvider
+						.state(
+							'root',
+							{
+								url: "/root",
+								templateUrl: "partials/state-root.html",
+								controller: "StateRootController"
+							}
+						)
+						.state(
+							'root.state1',
+							{
+								url: "/root/state1",
+								controller: "State1Controller",
+								templateUrl: "partials/state1.html"
+							}
+						)
+						.state(
+							'root.state2',
+							{
+								url: "/root/state2",
+								controller: "State2Controller",
+								templateUrl: "partials/state2.html"
+							}
+						);
+				}
+			);
 	</script>
 	<script src="scripts/app/controllers/main-controller.js"></script>
 	<script src="scripts/app/controllers/state-root-controller.js"></script>

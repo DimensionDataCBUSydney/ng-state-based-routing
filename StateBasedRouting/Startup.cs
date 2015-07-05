@@ -43,8 +43,23 @@ namespace StateBasedRouting
 				throw new ArgumentNullException("loggerFactory");
 
 			loggerFactory.AddConsole();
-
-			app.UseFileServer();
+			
+			app.UseFileServer(
+				new FileServerOptions
+				{
+					StaticFileOptions =
+					{
+						ContentTypeProvider = new FileExtensionContentTypeProvider
+						{
+							Mappings =
+							{
+								// Just so we can serve up our dummy data; not really safe to do with a DNX app, even with wwwroot.
+								{ ".json", "application/json" }
+							}
+						}
+					}
+				}
+			);
 		}
     }
 }
