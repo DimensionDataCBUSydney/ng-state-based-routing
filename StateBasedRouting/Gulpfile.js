@@ -27,6 +27,13 @@ gulp.task(
 );
 
 gulp.task(
+	"watch",
+	[
+		"watch-ts"
+	]
+);
+
+gulp.task(
 	"clean",
 	[
 		"clean-app-js",
@@ -35,11 +42,13 @@ gulp.task(
 	]
 );
 
-var cp = require("gulp-copy");
-var rm = require("gulp-clean");
-var tsc = require("gulp-tsc");
-var bowerMain = require("bower-main");
-var mainBowerFiles = require("main-bower-files");
+var cp				= require("gulp-copy");
+var plumber			= require("gulp-plumber");
+var rm				= require("gulp-clean");
+var tsc				= require("gulp-tsc");
+var watch			= require("gulp-watch");
+
+var bowerMain		= require("bower-main");
 
 var bowerScripts = bowerMain("js", "min.js");
 var bowerStyles = bowerMain("css", "min.css");
@@ -129,6 +138,20 @@ gulp.task(
 );
 
 gulp.task(
+	"watch-ts",
+	function () {
+		gulp
+			.watch(
+				"app/**/*.ts",
+				[
+					"build-ts"
+				]
+			)
+			.on("change", reportFileChange);
+	}
+);
+
+gulp.task(
 	"clean-app-js",
 	function () {
 		gulp.src(config.dir.appScripts)
@@ -137,3 +160,12 @@ gulp.task(
 			);
 	}
 );
+
+/**
+ * Print a notification about a changes to files to the console
+ * @param {} fileChange The file that changed.
+ * @returns {} 
+ */
+function reportFileChange(fileChange) {
+	console.log("File " + fileChange.path + " was " + fileChange.type + ", running tasks...");
+}
