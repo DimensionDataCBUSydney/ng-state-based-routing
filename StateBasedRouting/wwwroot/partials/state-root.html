@@ -1,11 +1,18 @@
-﻿<h2>States</h2>
-<div>{{greeting}}</div>
-<hr />
-
-<div style="margin-top: 20px; margin-bottom: 20px">
-	<button ui-sref="root.state1">Tab 1</button>
-	<button ui-sref="root.state2">Tab 2</button>
+﻿<div style="margin-top: 20px; margin-bottom: 20px">
+	<div class="ui container">
+		<div class="center aligned segment" style="margin-bottom: 0.5em;">
+			<h3 class="ui dividing heading">States</h3>
+			<div class="ui first">{{greeting}}</div>
+		</div>
+	</div>
+	<div class="ui container">
+		<div class="ui">
+			<button class="ui button" ui-sref="root.state1">Go to state 1</button>
+			<button class="ui button" ui-sref="root.state2">Go to state 2</button>
+		</div>
+		<div class="ui center aligned segment">
+			<div ui-view></div>
+		</div>
+	</div>
 </div>
-<div style="border: 1px blueviolet">
-	<div ui-view></div>
-</div>
+	

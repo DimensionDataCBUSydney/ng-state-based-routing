@@ -17,19 +17,17 @@
 	<script src="scripts/vendor/kendo.all.js"></script>
 </head>
 <body>
-	<div class="ui container">
-		<div class="ui center aligned segment">
-			<div ng-controller="MainController" class="">
-				{{greeting}}
-			</div>
-			<hr />
-
-			<div style="border: 1px black">
-				<div ui-view></div>
-			</div>
+	<div ng-controller="MainController" class="ui container" style="margin-top: 2em;">
+		<div class="center aligned">
+			<h1 class="ui header">{{greeting}}</h1>
 		</div>
 	</div>
-	
+	<div class="ui container">
+		<div class="ui center aligned">
+			<div ui-view></div>
+		</div>
+	</div>
+
 	<!-- AF: Yeah way too many scripts but for now, messing around with browserify or RequireJS AMDs would obscure the important bits of this demo -->
 	<script type="text/javascript">
 		angular
@@ -45,7 +43,7 @@
 				[
 					"$stateProvider",
 					"$urlRouterProvider",
-					function ($stateProvider, $urlRouterProvider) {
+					function($stateProvider, $urlRouterProvider) {
 						$stateProvider
 							.state(
 								'root',
