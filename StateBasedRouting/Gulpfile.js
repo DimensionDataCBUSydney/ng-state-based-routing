@@ -64,6 +64,12 @@ gulp.task(
 				gulp.dest(config.dir.vendorScripts)
 			);
 
+		// Explicit copy for semantic-ui components
+		gulp.src(config.dir.bower + "/semantic-ui/dist/**/*.js")
+			.pipe(
+				gulp.dest(config.dir.vendorScripts)
+			);
+
 		gulp.src("vendor/js/**/*.js")
 			.pipe(
 				gulp.dest(config.dir.vendorScripts)
@@ -88,26 +94,41 @@ gulp.task(
 	"build-vendor-css",
 	function () {
 		gulp.src(bowerStyles.normal)
+			.pipe(plumber())
 			.pipe(
 				gulp.dest(config.dir.vendorStyles)
-			);
-
-		// Explicit copy for bootstrap components
-		gulp.src(config.bowerDir + "/bootstrap/dist/css/*.css")
-			.pipe(
-				gulp.dest(config.dir.vendorStyles)
-			);
-
-		gulp.src(config.bowerDir + "/bootstrap/dist/fonts/*")
-			.pipe(
-				gulp.dest(config.dir.fonts)
 			);
 
 		gulp.src("vendor/css/**/*")
+			.pipe(plumber())
 			.pipe(
 				gulp.dest(config.dir.vendorStyles)
 			);
 
+		// Explicit copy for semantic-ui components
+		gulp.src(config.dir.bower + "/semantic-ui/dist/**/*.css")
+			.pipe(plumber())
+			.pipe(
+				gulp.dest(config.dir.vendorStyles)
+			);
+
+		gulp.src(config.dir.bower + "/semantic-ui/dist/themes/**/*")
+			.pipe(plumber())
+			.pipe(
+				gulp.dest(config.dir.vendorStyles + "/themes")
+			);
+
+		// Explicit copy for FontAwesome components
+		gulp.src(config.dir.bower + "/fontawesome/css/*")
+			.pipe(plumber())
+			.pipe(
+				gulp.dest(config.dir.vendorStyles)
+			);
+		gulp.src(config.dir.bower + "/fontawesome/fonts/*")
+			.pipe(plumber())
+			.pipe(
+				gulp.dest(config.dir.vendorStyles)
+			);
 	}
 );
 
