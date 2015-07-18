@@ -8,7 +8,8 @@ var config = {
 		vendorScripts: "wwwroot/scripts/vendor",
 		vendorStyles: "wwwroot/css/vendor",
 		fonts: "wwwroot/styles",
-		bower: "./bower_components"
+		bower: "./bower_components",
+		semantic: "./vendor/semantic"
 	}
 };
 
@@ -42,6 +43,7 @@ gulp.task(
 	]
 );
 
+var chug			= require("gulp-chug");
 var cp				= require("gulp-copy");
 var plumber			= require("gulp-plumber");
 var rm				= require("gulp-clean");
@@ -49,9 +51,27 @@ var tsc				= require("gulp-tsc");
 var watch			= require("gulp-watch");
 
 var bowerMain		= require("bower-main");
+var bowerScripts	= bowerMain("js", "min.js");
+var bowerStyles		= bowerMain("css", "min.css");
 
-var bowerScripts = bowerMain("js", "min.js");
-var bowerStyles = bowerMain("css", "min.css");
+//////////////
+// Semantic UI
+
+gulp.task(
+	"build-semantic",
+	function() {
+		gulp.src(config.dir.semantic + "/gulpfile.js", { read: false })
+			.pipe(
+				chug(
+					{
+						tasks: [
+							"build"
+						]
+					}
+				)
+			);
+	}
+);
 
 /////////////////
 // Vendor scripts
@@ -65,7 +85,7 @@ gulp.task(
 			);
 
 		// Explicit copy for semantic-ui components
-		gulp.src(config.dir.bower + "/semantic-ui/dist/**/*.js")
+		gulp.src(config.dir.semantic + "/dist/**/*.js")
 			.pipe(
 				gulp.dest(config.dir.vendorScripts)
 			);
@@ -93,12 +113,6 @@ gulp.task(
 gulp.task(
 	"build-vendor-css",
 	function () {
-		gulp.src(bowerStyles.normal)
-			.pipe(plumber())
-			.pipe(
-				gulp.dest(config.dir.vendorStyles)
-			);
-
 		gulp.src("vendor/css/**/*")
 			.pipe(plumber())
 			.pipe(
@@ -106,13 +120,12 @@ gulp.task(
 			);
 
 		// Explicit copy for semantic-ui components
-		gulp.src(config.dir.bower + "/semantic-ui/dist/**/*.css")
+		gulp.src(config.dir.semantic + "/dist/*.css")
 			.pipe(plumber())
 			.pipe(
 				gulp.dest(config.dir.vendorStyles)
 			);
-
-		gulp.src(config.dir.bower + "/semantic-ui/dist/themes/**/*")
+		gulp.src(config.dir.semantic + "/dist/themes/**/*")
 			.pipe(plumber())
 			.pipe(
 				gulp.dest(config.dir.vendorStyles + "/themes")

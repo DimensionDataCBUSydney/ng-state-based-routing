@@ -1,17 +1,20 @@
 {
-    "version": "1.0.0",
-    "name": "StateBasedRouting",
-    "private": true,
-    "devDependencies": {
-        "bower-main": "0.2.14",
-        "main-bower-files": "2.8.2",
-        "typescript": "1.5.0-beta",
-        "tsd": "0.6.3",
-        "gulp": "3.9.0",
-        "gulp-clean": "0.3.1",
-        "gulp-copy": "0.0.2",
-        "gulp-plumber": "1.0.1",
-        "gulp-tsc": "0.10.1",
-        "gulp-watch": "4.2.4"
-    }
+  "version": "1.0.0",
+  "name": "StateBasedRouting",
+  "private": true,
+  "devDependencies": {
+    "bower-main": "0.2.14",
+    "main-bower-files": "2.8.2",
+    "typescript": "1.5.0-beta",
+    "tsd": "0.6.3",
+    "gulp": "3.9.0",
+    "gulp-clean": "0.3.1",
+    "gulp-copy": "0.0.2",
+    "gulp-plumber": "1.0.1",
+    "gulp-tsc": "0.10.1",
+    "gulp-watch": "4.2.4"
+  },
+  "dependencies": {
+    "semantic-ui": "^2.0.4"
+  }
 }

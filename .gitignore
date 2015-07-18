@@ -190,6 +190,7 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 # Compiled / staged scripts
+/*/vendor/semantic/dist/
 /*/wwwroot/scripts/app/
 /*/wwwroot/scripts/vendor/
 /*/wwwroot/css/app/
