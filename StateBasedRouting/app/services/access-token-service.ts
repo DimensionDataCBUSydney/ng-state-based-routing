@@ -104,7 +104,8 @@ module ddcloud.sbr.services {
 				throw new Error("Shared secret for requesting access tokens has not been configured.");
 
 			var accessTokenResult = this.$q.defer<IAccessTokenResult>();
-		
+
+			// Only a GET for the purposes of this demo; would be a POST with client Id, secret and realm.
 			this.$http.get<IAccessTokenResult>(this.tokenServiceUrl)
 				.success(
 					result => {
