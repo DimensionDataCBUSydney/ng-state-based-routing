@@ -196,3 +196,6 @@ ModelManifest.xml
 /*/wwwroot/css/app/
 /*/wwwroot/css/vendor/
 /*/wwwroot/fonts/
+
+# Vagrant
+.vagrant/
