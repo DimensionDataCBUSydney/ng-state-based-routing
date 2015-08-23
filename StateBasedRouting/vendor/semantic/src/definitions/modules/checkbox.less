@@ -33,6 +33,7 @@
   backface-visibility: hidden;
   outline: none;
   vertical-align: baseline;
+  font-style: normal;
 
   min-height: @checkboxSize;
   font-size: @medium;
@@ -326,6 +327,12 @@
 .ui.radio.checkbox input:focus ~ .box:after,
 .ui.radio.checkbox input:focus ~ label:after {
   background-color: @radioFocusBulletColor;
+}
+
+/* Indeterminate */
+.ui.radio.checkbox input:indeterminate ~ .box:after,
+.ui.radio.checkbox input:indeterminate ~ label:after {
+  opacity: 0;
 }
 
 /* Active */

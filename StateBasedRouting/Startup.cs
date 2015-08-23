@@ -49,14 +49,7 @@ namespace StateBasedRouting
 				{
 					StaticFileOptions =
 					{
-						ContentTypeProvider = new FileExtensionContentTypeProvider
-						{
-							Mappings =
-							{
-								// Just so we can serve up our dummy data; not really safe to do with a DNX app, even with wwwroot.
-								{ ".json", "application/json" }
-							}
-						}
+						ContentTypeProvider = new FileExtensionContentTypeProvider()
 					}
 				}
 			);
